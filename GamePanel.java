@@ -33,9 +33,15 @@ public class GamePanel extends JPanel {
 
     setLayout(new BorderLayout(10, 10)); // hgap, vgap
     //setBackground(Color.white); // to match the background color of center grid panel
-    setOpaque(false);
+
     try {
-      BufferedImage myPicture = ImageIO.read(new File("Gift.jpg"));
+      // BufferedImage myPicture = ImageIO.read(new File("test.png"));
+      // // Graphics2D g = myPicture.createGraphics();
+      // // g.drawImage(myPicture, null, 100, 100);
+      // JLabel picLabel = new JLabel();
+      // picLabel.add(g);
+      // picLabel.setOpaque(true);
+      BufferedImage myPicture = ImageIO.read(new File("test.png"));
       JLabel picLabel = new JLabel(new ImageIcon(myPicture));
       add(picLabel);
     } catch(IOException e){

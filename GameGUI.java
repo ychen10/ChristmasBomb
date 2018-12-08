@@ -15,15 +15,11 @@ public class GameGUI {
 
     GamePanel panel = new GamePanel();
     frame.getContentPane().add(panel);
-
     frame.pack();
     frame.setVisible(true);
 
-
-    frame.setUndecorated(true);
         frame.pack();
         frame.setLocationRelativeTo(null);
-        frame.setBackground(new Color(0, 0, 0, 0));
         frame.setVisible(true);
 
   }
