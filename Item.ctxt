@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Item
+comment0.text=\n\ Represents\ the\ objects\ being\ dropped\ (either\ present\ or\ bomb)\n\n\ @author\ Chloe\ Moon\n\ @version\ 12/08/2018\n
+comment1.params=x\ y\ isGift
+comment1.target=Item(int,\ int,\ boolean)
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Item\n
+comment2.params=
+comment2.target=javafx.util.Pair\ getLocation()
+comment3.params=x\ y
+comment3.target=void\ setLocation(int,\ int)
+comment4.params=
+comment4.target=void\ setItemCollided()
+comment5.params=
+comment5.target=int\ getWidth()
+comment6.params=
+comment6.target=int\ getHeight()
+comment7.params=
+comment7.target=boolean\ isGift()
+numComments=8

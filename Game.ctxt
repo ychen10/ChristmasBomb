@@ -1,0 +1,23 @@
+#BlueJ class context
+comment0.target=Game
+comment0.text=\n\ Implements\ the\ details\ for\ playing\ the\ game,\ using\ ChristmasTree\n\ and\ Item\ class\n\n\ @author\ Chloe\ Moon\n\ @version\ 12/08/2018\n
+comment1.params=
+comment1.target=Game()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ Game\n
+comment2.params=drop
+comment2.target=void\ doCollide(Item)
+comment2.text=\n\ Checks\ if\ tree\ collides\ with\ gift\ or\ bomb\ and\ sets\ collision\ var\ to\n\ the\ respective\ value\ (1\ if\ collides\ with\ present,\ 0\ if\ no\ collision,\n\ -1\ if\ collides\ with\ bomb)\n\ \n\ \n\ @param\ dropped\ item,\ christmas\ tree\n
+comment3.params=
+comment3.target=void\ endGame()
+comment3.text=\n\ Ends\ the\ game\ if\ the\ score\ reches\ 1000\ or\ if\ the\ score\ <0.\n
+comment4.params=
+comment4.target=void\ addItem()
+comment4.text=\n\ Retrieve\ Item\ objects\ from\ the\ dormant\ queue\ and\ adds\ them\ to\ \n\ the\ active\ Vector\ if\ the\ size\ of\ the\ active\ vector\ is\ less\ than\ 6.\n
+comment5.params=
+comment5.target=void\ prepareItem()
+comment5.text=\n\ Initialize\ Item\ objects\ to\ be\ added\ to\ the\ dormant\ Queue.\n\ Using\ the\ Random\ class,\ the\ method\ will\ create\ gifts\ and\ bombs\n\ in\ a\ 1\:2\ ratio.\n
+comment6.params=
+comment6.target=void\ drop()
+comment7.params=
+comment7.target=void\ updateScore()
+numComments=8
