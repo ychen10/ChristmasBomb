@@ -47,6 +47,7 @@ public class GamePanel extends JPanel {
     } catch(IOException e){
       System.out.println(e);
     }
+    setLayout(null);
 
   }
 
