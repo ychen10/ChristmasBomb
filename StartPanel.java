@@ -9,19 +9,23 @@ import javax.imageio.ImageIO;
 
 public class StartPanel extends JPanel {
   JButton start;
-  JPanel game;
+  JPanel gamePanel;
+  Game game;
+  JLabel label;
 
-  public StartPanel() {
+  public StartPanel(Game game) {
+    this.game = game;
+    setLayout(new FlowLayout(FlowLayout.CENTER));
     try {
-      JLabel label = new JLabel(); // background of the label
+      label = new JLabel(); // background of the label
       label.setLayout(new FlowLayout(FlowLayout.CENTER));
       BufferedImage background = ImageIO.read(new File("background.png"));
       label.setIcon(new ImageIcon(background));
 
-      game = new GamePanel();
-      label.add(game);
-      game.setVisible(false);
-      game.setOpaque(false);;
+      gamePanel = new GamePanel(this.game);
+       
+      label.add(gamePanel);
+      gamePanel.setVisible(false);
 
       // JButton
       start = new JButton("START");
@@ -29,11 +33,16 @@ public class StartPanel extends JPanel {
       start.addActionListener(listener);
 
       label.add(start);
+      
+      label.setPreferredSize(new Dimension(800, 900));
+
       add(label);
-    
+
     } catch (IOException e) {
       System.out.println(e);
     }
+    
+
     
   }
 
@@ -41,8 +50,9 @@ public class StartPanel extends JPanel {
     public void actionPerformed(ActionEvent event) {
       start.setEnabled(false);
       start.setVisible(false);
-      game.setVisible(true);
-      //game.start();
+      gamePanel.setVisible(true);
+      label.setLayout(new FlowLayout(FlowLayout.LEFT));
+      game.start();
       // start the game
     }
   }
