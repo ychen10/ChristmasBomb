@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=EmptyCollectionException
+comment1.params=message
+comment1.target=EmptyCollectionException(java.lang.String)
+numComments=2

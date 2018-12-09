@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=ChristmasTree
+comment0.text=\n\ Represents\ a\ Christmas\ tree\ icon\ displayed\ at\ the\ bottom\ of\ the\ screen\n\n\ @author\ Chloe\ Moon\n\ @version\ 12/08/2018\n
+comment1.params=
+comment1.target=ChristmasTree()
+comment2.params=
+comment2.target=javafx.util.Pair\ getLocation()
+comment3.params=x\ y
+comment3.target=void\ setLocation(int,\ int)
+comment4.params=
+comment4.target=int\ getWidth()
+comment5.params=
+comment5.target=int\ getHeight()
+numComments=6

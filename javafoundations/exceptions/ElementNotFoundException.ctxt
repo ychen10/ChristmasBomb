@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=ElementNotFoundException
+comment1.params=message
+comment1.target=ElementNotFoundException(java.lang.String)
+numComments=2
