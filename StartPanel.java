@@ -7,12 +7,15 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.border.*;
+import javax.swing.Timer;
 
 public class StartPanel extends JPanel {
-  JButton start;
-  JPanel gamePanel;
-  Game game;
-  JLabel label;
+  private JButton start;
+  private JPanel gamePanel;
+  private Game game;
+  private JLabel label, time, score;
+  private Timer timer;
+  private int timeLeft = 120;
 
   public StartPanel(Game game) {
     this.game = game;
@@ -36,23 +39,46 @@ public class StartPanel extends JPanel {
       start = new JButton("START");
       StartListener listener = new StartListener();
       start.addActionListener(listener);
-
       label.add(start);
-    
-      label.setPreferredSize(new Dimension(800, 900));
 
       add(label);
     
   }
 
-  public void addScore() {
-    JLabel score = new JLabel("<html><center><h1>  Score:<br>" + game.getScore() + " / 1000  </h1></center></html>");
-      score.setBorder(new EmptyBorder(5,15,5,15));
+  public void addScoreTime() {
+    JLabel background = new JLabel();
+    background.setLayout(new BoxLayout(background, BoxLayout.Y_AXIS));
+    background.setPreferredSize(new Dimension(150, 400));
+    //background.setOpaque(true);
 
-      score.setBackground(Color.WHITE);
-      score.setOpaque(true);
-      //score.setPreferredSize(new Dimension(200, 100));
-      label.add(score);
+    score = new JLabel("<html><center><h1>  Score:<br>" + game.getScore() + " / 1000  </h1></center></html>");
+    score.setBorder(new EmptyBorder(5,15,5,15));
+    score.setOpaque(true);
+    background.add(score);
+
+    background.add(Box.createRigidArea (new Dimension (0, 100)));
+
+    time = new JLabel("<html><center><h1>  Time Left:<br>" + timeLeft + "s</h1></center></html>");
+    time.setBorder(new EmptyBorder(5,15,5,15));
+    time.setBackground(Color.WHITE);
+    time.setOpaque(true);
+    background.add(time);
+
+    label.add(background);
+  }
+
+  public void startCountdown() {
+    timer = new Timer(1000, new ActionListener() { // timer with 150 millisecond delay
+      public void actionPerformed(ActionEvent e) {
+        timeLeft --;
+        if (timeLeft <= 15) {
+          time.setText("<html><center><font color='red'><h1>Time Left:<br>" + timeLeft + "s</h1></font></center></html>");
+        } else {
+          time.setText("<html><center><h1>Time Left:<br>" + timeLeft + "s</h1></center></html>");
+        }
+      }
+    });
+    timer.start();
   }
 
   private class StartListener implements ActionListener {
@@ -61,9 +87,10 @@ public class StartPanel extends JPanel {
       start.setVisible(false);
       gamePanel.setVisible(true);
       label.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 50));
-      addScore();
+      addScoreTime();
+      startCountdown();
+
       game.start();
-      // start the game
     }
   }
 }
