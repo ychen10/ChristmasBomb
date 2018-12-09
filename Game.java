@@ -160,5 +160,9 @@ public class Game {
         for (int i = 0; i < 6; i ++) addItem();
         drop();
     }
+
+    public ChristmasTree getTree() {
+        return this.tree;
+    }
     
 }
