@@ -17,23 +17,23 @@ public class Game
     Vector<Item> active; // add Item objects from "dormant" to this vector
     int score; 
     boolean isStart; // indicates whether the game has started or not
-    int collision; 
     // change later *******
     final int screenWidth = 100; final int screenHeight=100;
     
     /**
      * Constructor for objects of class Game
      */
-    public Game()
+    public Game(ChristmasTree tree)
     {
         // tree
         dormant = new ArrayQueue<Item>();
         active = new Vector<Item>();
         isStart = false;
         score=0;
-        collision=0; 
+        tree=tree;
     }
 
+    // if it doesn't work maybe put a tree as a parameter
     /**
      * Checks if tree collides with gift or bomb and sets collision var to
      * the respective value (1 if collides with present, 0 if no collision,
@@ -42,7 +42,7 @@ public class Game
      * 
      * @param dropped item, christmas tree
      */
-    public void doCollide(Item drop){
+    public int doCollide(Item drop){
         if(active.contains(drop)){
             // get location of the item
             Pair<Integer, Integer> itemloc = drop.getLocation();
@@ -68,20 +68,25 @@ public class Game
                     // change the itemCollided status of the item to true
                     active.get(active.indexOf(drop)).setItemCollided();
                     // update the game-wide indicator
-                    collision=1;
+                    score = score+50; // update score
+                    active.remove(drop);
+                    return 1;
                 } else if(!drop.isGift()){ // if it's a bomb
                     // change the itemCollided status of the item to true
                     active.get(active.indexOf(drop)).setItemCollided();
-                    collision=-1;
+                    score = score-100; // update score
+                    active.remove(drop);
+                    return -1;
                 }
             } else {
-                collision=0;
+                return 0;
             }
         } else { // if active vector (currently dropping) doesn't have this item
             System.out.println("Item not being dropped (not in 'Active')");
         }
-
+        return 0;
     }
+    
     
     /**
      * Ends the game if the score reches 1000 or if the score <0.
@@ -125,29 +130,10 @@ public class Game
         dormant.enqueue(toAdd); // adds to the dormant queue
     }
     
-    // updates the location variable of each item 
-    // and check if anything collies with the tree
-    // if collide: remove the item from the active vector
-    // & updateScore()
-    public void drop(){
-        // iterate through the active vector
-        for(int i=0; i<active.size(); i++){
-            // 1) upate location
-            // 2) checks if anything collides with the tree
-            if(collision!=0){ // if collides
-                // update score
-                updateScore();
-                // remove the item from the active vector
-                active.remove(i);
-            }
-        }
+
+    public int getScore(){
+        return score;
     }
     
-    public void updateScore(){
-        if(collision==1){ // if collides with a present
-            score=score+50;
-        } else if(collision==-1){
-            score=score-100;
-        }
-    }
+    // a method that iterate through the active vector and check if there is any collision, and update the score accordingly
 }

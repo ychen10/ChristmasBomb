@@ -32,6 +32,7 @@ public class Item
         return location;
     }
     
+    
     public void setLocation(int x, int y){
         this.location = new Pair<Integer, Integer>(x,y);
     }
