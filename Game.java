@@ -1,6 +1,6 @@
 import javafoundations.*;
 import java.util.*;
-import javafx.util.Pair;// for pair class
+
 
 /**
  * Implements the details for playing the game, using ChristmasTree
@@ -46,9 +46,8 @@ public class Game {
             int itemX = drop.getX();
             int itemY = drop.getY();
             // get location of the tree 
-            Pair<Integer, Integer> treeloc = tree.getLocation();
-            int treeX = treeloc.getKey();
-            int treeY = treeloc.getValue();
+            int treeX = tree.getX();
+            int treeY = tree.getY();
             // calculate the distance between the two objects
             int treeW = tree.getWidth();
             int treeH = tree.getHeight();
@@ -99,30 +98,32 @@ public class Game {
      * the active Vector if the size of the active vector is less than 6.
      */
     public void addItem(){
-        while (active.size() < 6){
+        Random rand = new Random();
+        if (active.size() < 5){
             if (dormant.isEmpty()) prepareItem();
-            Item toAdd = dormant.dequeue(); // gets the item from the dormant queue
-            active.add(toAdd);
+            if (rand.nextInt(3) == 0) {
+                Item toAdd = dormant.dequeue(); // gets the item from the dormant queue
+                active.add(toAdd);
+            }
         }
     }
     
     /**
      * Initialize Item objects to be added to the dormant Queue.
      * Using the Random class, the method will create gifts and bombs
-     * in a 1:2 ratio.
+     * in a 1:1 ratio.
      */
     public void prepareItem() {
         Item toAdd; 
         Random rand = new Random();
-        int n = 1 + rand.nextInt(3); // gives 1+(0~2)
-        // int cwidth = tree.getWidth();
+        int n = rand.nextInt(2); 
         // Random class to generate the x-location of the object
         // y-location: same as the height of the screen
-        //int x = rand.nextInt(screenWidth + 1); //0~screenwidth
-        int x = 50;
-        int y = 30;
+        int x = rand.nextInt(450) - 5; //0~screenwidth
+        // int x = 50; 
+        int y = -60;
         //int y = screenHeight; 
-        if (n == 3){ // when 3, add a present to the dormant queue
+        if (n == 0){ // when 3, add a present to the dormant queue
             toAdd = new Item(x,y,true); // is a gift
         } else { // so if n=1 or 2
             toAdd = new Item(x,y,false); // is a bomb
@@ -140,10 +141,15 @@ public class Game {
     }
 
     public void drop() {
-        addItem();
-        System.out.println("Changing the location of the items.");
+        Random rand = new Random();
+        if (rand.nextInt(7) == 0) addItem();
+
         if (this.isStart) {
-            for (Item item : active) item.setY(item.getY() + 5);
+            for (int i = 0; i < active.size(); i ++) {
+                Item item = active.get(i);
+                item.setY(item.getY() + 5);
+                if (item.getY() > 740) active.remove(item);
+            }
         }
 
         // do collide
@@ -151,7 +157,12 @@ public class Game {
 
     public void start() {
         this.isStart = true;
+        for (int i = 0; i < 6; i ++) addItem();
         drop();
+    }
+
+    public ChristmasTree getTree() {
+        return this.tree;
     }
     
 }
