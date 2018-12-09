@@ -19,9 +19,9 @@ public class StartPanel extends JPanel {
       label.setIcon(new ImageIcon(background));
 
       game = new GamePanel();
-      label.add(game, BorderLayout.LINE_START);
-      game.setSize(new Dimension(600, 700));
+      label.add(game);
       game.setVisible(false);
+      game.setOpaque(false);;
 
       // JButton
       start = new JButton("START");
@@ -42,6 +42,7 @@ public class StartPanel extends JPanel {
       start.setEnabled(false);
       start.setVisible(false);
       game.setVisible(true);
+      //game.start();
       // start the game
     }
   }
