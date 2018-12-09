@@ -19,16 +19,6 @@ public class GamePanel extends JPanel {
 
   public GamePanel(Game game) {
     this.game = game;
-
-    // try {
-    //   JLabel label = new JLabel(); // background of the label
-    //   BufferedImage background = ImageIO.read(new File("christmas.jpg"));
-    //   label.setIcon(new ImageIcon(background));
-    //   add(label);
-    // } catch (IOException e) {
-    //   System.out.println(e);
-    // }
-
     timer = new Timer(50, new ActionListener() { // timer with 150 millisecond delay
       public void actionPerformed(ActionEvent e) {
         astr1Y += OFFSET; // add 5 t the y poistion
@@ -54,14 +44,8 @@ public class GamePanel extends JPanel {
 
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
-
-    // loop through active vector and put this in the loop
-    //g.drawImage(image, astr1X, astr1Y, this);
     game.drop();
     Vector<Item> active = game.getActive();
-    // Item item = active.get(0);
-    // g.drawImage(gift, item.getX(), item.getY(), this);
-    g.drawImage(gift, astr1X, astr1Y, this);
     for (Item item : active) {
       if (item.isGift()) {
         g.drawImage(gift, item.getX(), item.getY(), this);

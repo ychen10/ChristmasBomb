@@ -6,6 +6,7 @@ import java.util.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import javax.imageio.ImageIO;
+import javax.swing.border.*;
 
 public class StartPanel extends JPanel {
   JButton start;
@@ -26,6 +27,10 @@ public class StartPanel extends JPanel {
        
       label.add(gamePanel);
       gamePanel.setVisible(false);
+      
+    } catch (IOException e) {
+      System.out.println(e);
+    }
 
       // JButton
       start = new JButton("START");
@@ -33,17 +38,21 @@ public class StartPanel extends JPanel {
       start.addActionListener(listener);
 
       label.add(start);
-      
+    
       label.setPreferredSize(new Dimension(800, 900));
 
       add(label);
-
-    } catch (IOException e) {
-      System.out.println(e);
-    }
     
+  }
 
-    
+  public void addScore() {
+    JLabel score = new JLabel("<html><center><h1>  Score:<br>" + game.getScore() + " / 1000  </h1></center></html>");
+      score.setBorder(new EmptyBorder(5,15,5,15));
+
+      score.setBackground(Color.WHITE);
+      score.setOpaque(true);
+      //score.setPreferredSize(new Dimension(200, 100));
+      label.add(score);
   }
 
   private class StartListener implements ActionListener {
@@ -51,7 +60,8 @@ public class StartPanel extends JPanel {
       start.setEnabled(false);
       start.setVisible(false);
       gamePanel.setVisible(true);
-      label.setLayout(new FlowLayout(FlowLayout.LEFT));
+      label.setLayout(new FlowLayout(FlowLayout.LEFT, 50, 50));
+      addScore();
       game.start();
       // start the game
     }

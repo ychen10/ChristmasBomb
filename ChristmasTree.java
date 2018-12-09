@@ -1,4 +1,3 @@
-import javafx.util.Pair;// for pair class
 
 /**
  * Represents a Christmas tree icon displayed at the bottom of the screen
@@ -9,7 +8,8 @@ import javafx.util.Pair;// for pair class
 public class ChristmasTree
 {
     // instance variables 
-    Pair<Integer, Integer> location;
+    private int x;
+    private int y;
     // change this later accordingly
     final int width=10 ; final int height=10;
     
@@ -17,18 +17,23 @@ public class ChristmasTree
     public ChristmasTree()
     {
         // ********* change the values later
-        location = new Pair<Integer, Integer>(0,0); 
+        this.x = 0;
+        this.y = 0;
     }
     
     //returns the location variable of the ChristmasTree object
-    public Pair<Integer, Integer> getLocation(){
-        return location; // .getKey() or .getValue()
-    };
+    public int getX(){
+        return this.x;
+    }
     
+    public int getY(){
+        return this.y;
+    }
     //modifies the location variable of the ChristmasTree object 
     // based on the user input
     public void setLocation(int x, int y){
-        this.location = new Pair<Integer, Integer>(x,y);
+        this.x = x;
+        this.y = y;
     }
     
     public int getWidth(){

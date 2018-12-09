@@ -14,7 +14,7 @@ public class Item
     int x;
     int y;
     // change later
-    final int width=10 ; final int height=10;
+    final int width = 10 ; final int height = 10;
     boolean itemCollided; 
 
 
