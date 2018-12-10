@@ -21,8 +21,9 @@ public class GamePanel extends JPanel {
     this.game = game;
     this.ct = game.getTree();
     this.ct.setLocation(0, treeY);
-    timer = new Timer(50, new ActionListener() { // timer with 150 millisecond delay
+    timer = new Timer(20, new ActionListener() { // timer with 150 millisecond delay
       public void actionPerformed(ActionEvent e) {
+        if (game.win() || game.lose()) game.endGame();
         repaint();
       }
     });
@@ -43,23 +44,34 @@ public class GamePanel extends JPanel {
   }
 
   public Dimension getPreferredSize() {
-    return new Dimension(500, 750);
+    return new Dimension(500, 750); // 250 - 160, 375 - 160
   }
 
   protected void paintComponent(Graphics g) {
-    super.paintComponent(g);
-    game.drop();
-    Vector<Item> active = game.getActive();
+    if (game.didEnd()) {
+      try {
+        BufferedImage image = ImageIO.read(new File("gameOver.png"));
+        if (game.win()) image = ImageIO.read(new File("win.png"));
 
-    ct.setLocation(mouse, treeY);
-    g.drawImage(tree, mouse, treeY, this);
+        g.drawImage(image, 90, 215, this);
+      } catch (IOException ex) {
+        System.out.println(ex);
+      }
+    } else {
+      super.paintComponent(g);
+      game.drop();
+      Vector<Item> active = game.getActive();
 
-    for (Item item : active) {
-      System.out.println("item at: " + item.getX() + ", " +item.getY());
-      if (item.isGift()) {
-        g.drawImage(gift, item.getX(), item.getY(), this);
-      } else {
-        g.drawImage(bomb, item.getX(), item.getY(), this);
+      ct.setLocation(mouse, treeY);
+      g.drawImage(tree, mouse, treeY, this);
+
+      for (Item item : active) {
+        // System.out.println("item at: " + item.getX() + ", " + item.getY());
+        if (item.isGift()) {
+          g.drawImage(gift, item.getX(), item.getY(), this);
+        } else {
+          g.drawImage(bomb, item.getX(), item.getY(), this);
+        }
       }
     }
   }
@@ -68,7 +80,7 @@ public class GamePanel extends JPanel {
     public void mouseMoved(MouseEvent event) {
       int x = event.getX() - 150 > 500 ? 500 : event.getX() - 155;
       mouse = x;
-      System.out.println("tree at: " + ct.getX() + ", " + ct.getY());
+      //System.out.println("tree at: " + ct.getX() + ", " + ct.getY());
     }
   }
 }
