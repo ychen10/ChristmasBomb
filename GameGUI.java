@@ -1,6 +1,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.LineBorder;
+
 /**
  * Write a description of class GameGUI here.
  *
@@ -11,16 +13,16 @@ public class GameGUI {
   public static void main(String[] args) {
     JFrame frame = new JFrame ("Christams Bomb");
     frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-    frame.setPreferredSize(new Dimension(1000, 1000));
+    frame.setPreferredSize(new Dimension(800, 900));
+    ChristmasTree tree = new ChristmasTree();
+    Game game = new Game(tree);
 
-    GamePanel panel = new GamePanel();
-    frame.getContentPane().add(panel);
+    StartPanel start = new StartPanel(game);
+ 
+    frame.getContentPane().add(start);
     frame.pack();
     frame.setVisible(true);
-
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
+    frame.setLocationRelativeTo(null);
+    frame.setResizable(true);
   }
 }

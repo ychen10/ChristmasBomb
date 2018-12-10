@@ -1,63 +1,75 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.awt.Graphics;
+import javax.swing.Timer;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
 import javax.imageio.ImageIO;
-import javax.swing.JPanel;
+import java.awt.geom.Area;
 
 public class GamePanel extends JPanel {
-  //instance vars
-  private JButton[][] buttons;
-  private JButton quitButton, againButton;
-  private JLabel statusLabel;
-  private ImageIcon xImg, oImg, tieImg; //these images will be used in a couple
-  // of diff methods,so make them instance vars, and create them only once.
+  private Timer timer = null;
+  private BufferedImage bomb, tree, gift;
+  private Game game;
+  private ChristmasTree ct;
+  private int mouse;
+  private final int treeY = 450;
 
+  public GamePanel(Game game) {
+    this.game = game;
+    this.ct = game.getTree();
+    this.ct.setLocation(0, treeY);
+    timer = new Timer(50, new ActionListener() { // timer with 150 millisecond delay
+      public void actionPerformed(ActionEvent e) {
+        repaint();
+      }
+    });
 
-
-
-  // Constructor. Notice how it takes an instance of the game as input!
-  public GamePanel() {
-
-    // xImg = createImageIcon("Tree.jpg", "a Tree image");
-    // oImg = createImageIcon("Gift.jpg", "a Gift image");
-    // tieImg = createImageIcon("Bomb.jpg", "a tie image");
-    //
-    // statusLabel = new JLabel("Player X goes first", xImg, JLabel.CENTER);
-
-    setLayout(new BorderLayout(10, 10)); // hgap, vgap
-    //setBackground(Color.white); // to match the background color of center grid panel
+    timer.start();
 
     try {
-      // BufferedImage myPicture = ImageIO.read(new File("test.png"));
-      // // Graphics2D g = myPicture.createGraphics();
-      // // g.drawImage(myPicture, null, 100, 100);
-      // JLabel picLabel = new JLabel();
-      // picLabel.add(g);
-      // picLabel.setOpaque(true);
-      BufferedImage myPicture = ImageIO.read(new File("test.png"));
-      JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-      add(picLabel);
-    } catch(IOException e){
-      System.out.println(e);
+      bomb = ImageIO.read(new File("bomb.png"));
+      tree = ImageIO.read(new File("tree.png"));
+      gift = ImageIO.read(new File("present.png"));
+    } catch (IOException ex) {
+      System.out.println(ex);
     }
-    setLayout(null);
 
+    MouseHandler mh = new MouseHandler();
+    addMouseListener(mh);
+    addMouseMotionListener(mh);
   }
 
-  private static ImageIcon createImageIcon(String path, String description) {
-    java.net.URL imgURL = GamePanel.class.getResource(path);
-    if (imgURL != null) {
-      return new ImageIcon(imgURL, description);
-    } else {
-      System.err.println("Couldn't find file: " + path);
-      return null;
+  public Dimension getPreferredSize() {
+    return new Dimension(500, 750);
+  }
+
+  protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    game.drop();
+    Vector<Item> active = game.getActive();
+
+    ct.setLocation(mouse, treeY);
+    g.drawImage(tree, mouse, treeY, this);
+    //treeLabel.setLocation(mouse, treeY);
+
+    for (Item item : active) {
+      if (item.isGift()) {
+        g.drawImage(gift, item.getX(), item.getY(), this);
+      } else {
+        g.drawImage(bomb, item.getX(), item.getY(), this);
+      }
+    }
+  }
+
+  public class MouseHandler extends MouseAdapter {
+    public void mouseMoved(MouseEvent event) {
+      int x = event.getX() - 150 > 500 ? 500 : event.getX() - 155;
+      mouse = x;
+      //mouse = event.getX();
+      System.out.println("mouse:" + event.getX() + "  " + "tree: " + mouse);
     }
   }
 }

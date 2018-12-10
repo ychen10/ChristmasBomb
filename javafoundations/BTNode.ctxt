@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=BTNode
+comment1.params=element
+comment1.target=BTNode(java.lang.Object)
+comment10.params=iter
+comment10.target=void\ inorder(ArrayIterator)
+comment11.params=iter
+comment11.target=void\ preorder(ArrayIterator)
+comment12.params=iter
+comment12.target=void\ postorder(ArrayIterator)
+comment2.params=
+comment2.target=java.lang.Object\ getElement()
+comment3.params=element
+comment3.target=void\ setElement(java.lang.Object)
+comment4.params=
+comment4.target=BTNode\ getLeft()
+comment5.params=left
+comment5.target=void\ setLeft(BTNode)
+comment6.params=
+comment6.target=BTNode\ getRight()
+comment7.params=right
+comment7.target=void\ setRight(BTNode)
+comment8.params=target
+comment8.target=BTNode\ find(java.lang.Object)
+comment9.params=
+comment9.target=int\ count()
+numComments=13
