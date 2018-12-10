@@ -18,8 +18,10 @@ public class GameGUI {
     Game game = new Game(tree);
 
     StartPanel start = new StartPanel(game);
+    //GameOverPanel over = new GameOverPanel(game);
  
     frame.getContentPane().add(start);
+    //frame.getContentPane().add(over);
     frame.pack();
     frame.setVisible(true);
     frame.setLocationRelativeTo(null);
