@@ -11,14 +11,13 @@ import java.util.*;
  */
 public class Game {
     // instance variables
-    ChristmasTree tree;
-    ArrayQueue<Item> dormant;  // stores the dorman Item objects
-    Vector<Item> active; // add Item objects from "dormant" to this vector
-    int score; 
-    boolean isStart; // indicates whether the game has started or not
-    // change later *******
-    final int screenWidth = 500; final int screenHeight = 700;
-    
+    private ChristmasTree tree;
+    private ArrayQueue<Item> dormant;  // stores the dorman Item objects
+    private Vector<Item> active; // add Item objects from "dormant" to this vector
+    private int score; 
+    private boolean isStart; // indicates whether the game has started or not
+    private Boolean win;
+    // change later *******    
     /**
      * Constructor for objects of class Game
      */
@@ -29,6 +28,7 @@ public class Game {
         isStart = false;
         score = 0;
         this.tree = tree;
+        win = null;
     }
 
     // if it doesn't work maybe put a tree as a parameter
@@ -40,7 +40,7 @@ public class Game {
      * 
      * @param dropped item, christmas tree
      */
-    public doCollide(Item drop){
+    public void doCollide(Item drop){
         if (active.contains(drop)) {
             // get location of the item
             int itemX = drop.getX() + 36;// actual dropping object
@@ -57,13 +57,13 @@ public class Game {
                     // update the game-wide indicator
                     score = score + 50; // update score
                     active.remove(drop);
-                    System.out.println("COLLIDED WITH A GIFT");
+                    //System.out.println("COLLIDED WITH A GIFT");
                 } else { // if it's a bomb
                     // change the itemCollided status of the item to true
                     //active.get(active.indexOf(drop)).setItemCollided();
                     score = score - 100; // update score
                     active.remove(drop);
-                    System.out.println("COLLIDED WITH A BOMB");
+                    //System.out.println("COLLIDED WITH A BOMB");
                 }
             }
         }
@@ -74,9 +74,7 @@ public class Game {
      * Ends the game if the score reches 1000 or if the score <0.
      */
     public void endGame(){
-        if (score == 1000 || score < 0){
-            isStart = false;
-        }
+        isStart = false;
     }
     
     /**
@@ -148,6 +146,23 @@ public class Game {
 
     public ChristmasTree getTree() {
         return this.tree;
+    }
+
+    public boolean win() {
+        return (score >= 1000);
+    }
+
+    public boolean lose() {
+        return (score < 0 || (win != null && win.equals(false)));
+    }
+
+    public void setLose() {
+        win = false;
+        isStart = false;
+    }
+
+    public boolean didEnd() {
+        return !isStart;
     }
     
 }
