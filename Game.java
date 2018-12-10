@@ -40,7 +40,7 @@ public class Game {
      * 
      * @param dropped item, christmas tree
      */
-    public int doCollide(Item drop){
+    public doCollide(Item drop){
         if (active.contains(drop)) {
             // get location of the item
             int itemX = drop.getX() + 36;// actual dropping object
@@ -58,19 +58,15 @@ public class Game {
                     score = score + 50; // update score
                     active.remove(drop);
                     System.out.println("COLLIDED WITH A GIFT");
-                    return 1;
                 } else { // if it's a bomb
                     // change the itemCollided status of the item to true
                     //active.get(active.indexOf(drop)).setItemCollided();
                     score = score - 100; // update score
                     active.remove(drop);
                     System.out.println("COLLIDED WITH A BOMB");
-                    return -1;
                 }
             }
-            return 0;
         }
-        return 0;
     }
     
     
