@@ -13,7 +13,7 @@ public class Game {
     // instance variables
     private ChristmasTree tree;
     private ArrayQueue<Item> dormant;  // stores the dorman Item objects
-    private Vector<Item> active; // add Item objects from "dormant" to this vector
+    private LinkedList<Item> active; // add Item objects from "dormant" to this linkedlist
     private int score; 
     private boolean isStart; // indicates whether the game has started or not
     private Boolean win;
@@ -24,7 +24,7 @@ public class Game {
     public Game(ChristmasTree tree) {
         // tree
         dormant = new ArrayQueue<Item>();
-        active = new Vector<Item>();
+        active = new LinkedList<Item>();
         isStart = false;
         score = 0;
         this.tree = tree;
@@ -79,7 +79,7 @@ public class Game {
     
     /**
      * Retrieve Item objects from the dormant queue and adds them to 
-     * the active Vector if the size of the active vector is less than 6.
+     * the active linkedlist if the size of the active linkedlist is less than 6.
      */
     public void addItem(){
         Random rand = new Random();
@@ -120,7 +120,7 @@ public class Game {
         return score;
     }
 
-    public Vector<Item> getActive() {
+    public LinkedList<Item> getActive() {
         return this.active;
     }
 
@@ -153,7 +153,7 @@ public class Game {
     }
 
     public boolean lose() {
-        return (score < 0 || (win != null && win.equals(false)));
+        return score < 0 || (win != null && win.equals(false));
     }
 
     public void setLose() {
