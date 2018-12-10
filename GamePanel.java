@@ -15,7 +15,7 @@ public class GamePanel extends JPanel {
   private Game game;
   private ChristmasTree ct;
   private int mouse;
-  private final int treeY = 450;
+  private final int treeY = 440; // 450 + 25
 
   public GamePanel(Game game) {
     this.game = game;
@@ -53,9 +53,9 @@ public class GamePanel extends JPanel {
 
     ct.setLocation(mouse, treeY);
     g.drawImage(tree, mouse, treeY, this);
-    //treeLabel.setLocation(mouse, treeY);
 
     for (Item item : active) {
+      System.out.println("item at: " + item.getX() + ", " +item.getY());
       if (item.isGift()) {
         g.drawImage(gift, item.getX(), item.getY(), this);
       } else {
@@ -68,8 +68,7 @@ public class GamePanel extends JPanel {
     public void mouseMoved(MouseEvent event) {
       int x = event.getX() - 150 > 500 ? 500 : event.getX() - 155;
       mouse = x;
-      //mouse = event.getX();
-      System.out.println("mouse:" + event.getX() + "  " + "tree: " + mouse);
+      System.out.println("tree at: " + ct.getX() + ", " + ct.getY());
     }
   }
 }
