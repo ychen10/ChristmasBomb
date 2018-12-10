@@ -60,7 +60,7 @@ public class GamePanel extends JPanel {
     } else {
       super.paintComponent(g);
       game.drop();
-      Vector<Item> active = game.getActive();
+      LinkedList<Item> active = game.getActive();
 
       ct.setLocation(mouse, treeY);
       g.drawImage(tree, mouse, treeY, this);
