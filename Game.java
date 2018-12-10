@@ -40,47 +40,33 @@ public class Game {
      * 
      * @param dropped item, christmas tree
      */
-    public int doCollide(Item drop){
-        if (active.contains(drop)){
+    public doCollide(Item drop){
+        if (active.contains(drop)) {
             // get location of the item
-            int itemX = drop.getX();
-            int itemY = drop.getY();
-            // get location of the tree 
+            int itemX = drop.getX() + 36;// actual dropping object
+            int itemY = drop.getY() + 36;
+            // get location of the tree
             int treeX = tree.getX();
-            int treeY = tree.getY();
-            // calculate the distance between the two objects
-            int treeW = tree.getWidth();
-            int treeH = tree.getHeight();
-            int itemW = drop.getWidth();
-            // int itemH = drop.getHeight();
-            // range
-            double xRange = (treeW+itemW)/2.0;
-            double yRange = (treeH+treeW)/2.0;
-            
-            // if within a certain range, they collide
-            if (Math.abs(itemX-treeX)<=xRange && Math.abs(itemY-treeY)<=yRange){
-                if(drop.isGift()){ // if it's a gift
-                    // does setting the drop directly makes sense?
-                    // change the itemCollided status of the item to true
-                    active.get(active.indexOf(drop)).setItemCollided();
+            // int treeY = tree.getY();
+            int starX = treeX + 160; // 25+36
+            int starY = 475;
+            double distance = Math.sqrt(Math.pow(itemX - starX, 2) + Math.pow(itemY - starY, 2));
+            if (distance < 50) { // do collide
+                if (drop.isGift()) {
+                    //active.get(active.indexOf(drop)).setItemCollided();
                     // update the game-wide indicator
-                    score = score+50; // update score
+                    score = score + 50; // update score
                     active.remove(drop);
-                    return 1;
-                } else if(!drop.isGift()){ // if it's a bomb
+                    System.out.println("COLLIDED WITH A GIFT");
+                } else { // if it's a bomb
                     // change the itemCollided status of the item to true
-                    active.get(active.indexOf(drop)).setItemCollided();
-                    score = score-100; // update score
+                    //active.get(active.indexOf(drop)).setItemCollided();
+                    score = score - 100; // update score
                     active.remove(drop);
-                    return -1;
+                    System.out.println("COLLIDED WITH A BOMB");
                 }
-            } else {
-                return 0;
             }
-        } else { // if active vector (currently dropping) doesn't have this item
-            System.out.println("Item not being dropped (not in 'Active')");
         }
-        return 0;
     }
     
     
@@ -101,7 +87,7 @@ public class Game {
         Random rand = new Random();
         if (active.size() < 5){
             if (dormant.isEmpty()) prepareItem();
-            if (rand.nextInt(3) == 0) {
+            if (rand.nextInt(6) == 0) {
                 Item toAdd = dormant.dequeue(); // gets the item from the dormant queue
                 active.add(toAdd);
             }
@@ -149,10 +135,9 @@ public class Game {
                 Item item = active.get(i);
                 item.setY(item.getY() + 5);
                 if (item.getY() > 740) active.remove(item);
+                doCollide(item);
             }
         }
-
-        // do collide
     }
 
     public void start() {
