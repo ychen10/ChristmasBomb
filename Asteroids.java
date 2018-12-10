@@ -17,6 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import java.awt.Point;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+
 
 public class Asteroids extends JPanel {
     int astr1X = 50;
@@ -27,9 +31,17 @@ public class Asteroids extends JPanel {
     private final static int HEIGHT = 20;
     private Timer timer = null;
     private BufferedImage image;
+    private JPanel mousepanel;
+    private Point initialClick;
+    private JLabel jLabel1;
+    
+    
 
 
     public Asteroids() {
+        jLabel1 = new JLabel();
+        jLabel1.setIcon(new ImageIcon("Tree.png"));
+        add(jLabel1);
         timer = new Timer(50, new ActionListener() {     // timer with 150 millisecond delay
             public void actionPerformed(ActionEvent e) {
                 astr1Y += OFFSET;                         // add 5 t the y poistion
@@ -46,30 +58,7 @@ public class Asteroids extends JPanel {
             // handle exception...
        }
 
-        Action downAction = new AbstractAction() {        // slows down the timer
-            public void actionPerformed(ActionEvent e) {
-                int delay = timer.getDelay();
-                if (delay < 1000) {
-                    delay += 100;
-                    timer.setDelay(delay);
-                }
-            }
-        };
-
-        Action upAction = new AbstractAction() {         // speeds up the timer
-            public void actionPerformed(ActionEvent e) {
-                int delay = timer.getDelay();
-                if (delay > 100) {
-                    delay -= 100;
-                    timer.setDelay(delay);
-                }
-            }
-        };
-
-        getInputMap().put(KeyStroke.getKeyStroke("UP"), "upAction");  // up key binding
-        getActionMap().put("upAction", upAction);
-        getInputMap().put(KeyStroke.getKeyStroke("DOWN"), "downAction");  // down key binding
-        getActionMap().put("downAction", downAction);
+        
     }
     
     
@@ -98,6 +87,29 @@ public class Asteroids extends JPanel {
 
         
     }
+    
+     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {                                     
+          initialClick = evt.getPoint();
+    }  
+    
+     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {                                     
+
+        int thisX = jLabel1.getLocation().x;
+        int thisY = jLabel1.getLocation().y;
+
+        // Determine how much the mouse moved since the initial click
+        int xMoved = (thisX + evt.getX()) - (thisX + initialClick.x);
+        int yMoved = (thisY + evt.getY()) - (thisY + initialClick.y);
+
+        // Move picture to this position
+        int X = thisX + xMoved;
+        int Y = thisY + yMoved;
+
+        jLabel1.setLocation(X, Y);
+        jLabel1.repaint();
+
+
+    }    
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

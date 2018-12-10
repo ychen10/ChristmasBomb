@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Gui
+comment1.params=
+comment1.target=Gui()
+comment2.params=evt
+comment2.target=void\ jLabel1MousePressed(java.awt.event.MouseEvent)
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4
