@@ -14,7 +14,7 @@ public class GamePanel extends JPanel {
   private BufferedImage bomb, tree, gift;
   private Game game;
   private ChristmasTree ct;
-  private int mouse;
+  private int mouse; private int score;
   private final int treeY = 440; // 450 + 25
 
   public GamePanel(Game game) {

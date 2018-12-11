@@ -67,6 +67,7 @@ public class StartPanel extends JPanel {
     label.add(background);
   }
 
+  // takes care of score too
   public void startCountdown() {
     timer = new Timer(1000, new ActionListener() { // timer with 150 millisecond delay
       public void actionPerformed(ActionEvent e) {
@@ -80,6 +81,8 @@ public class StartPanel extends JPanel {
           return;
         }
 
+        score.setText("<html><center><h1>  Score:<br>" + game.getScore() + " / 1000  </h1></center></html>");
+        //System.out.println("SCORE: "+game.getScore());
         timeLeft--;
 
         if (timeLeft <= 15) {

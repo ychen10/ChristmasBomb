@@ -14,10 +14,10 @@ public class Game {
     private ChristmasTree tree;
     private ArrayQueue<Item> dormant;  // stores the dorman Item objects
     private LinkedList<Item> active; // add Item objects from "dormant" to this linkedlist
-    private int score; 
+    private int score;
     private boolean isStart; // indicates whether the game has started or not
     private Boolean win;
-    // change later *******    
+    // change later *******
     /**
      * Constructor for objects of class Game
      */
@@ -36,8 +36,8 @@ public class Game {
      * Checks if tree collides with gift or bomb and sets collision var to
      * the respective value (1 if collides with present, 0 if no collision,
      * -1 if collides with bomb)
-     * 
-     * 
+     *
+     *
      * @param dropped item, christmas tree
      */
     public void doCollide(Item drop){
@@ -68,17 +68,17 @@ public class Game {
             }
         }
     }
-    
-    
+
+
     /**
      * Ends the game if the score reches 1000 or if the score <0.
      */
     public void endGame(){
         isStart = false;
     }
-    
+
     /**
-     * Retrieve Item objects from the dormant queue and adds them to 
+     * Retrieve Item objects from the dormant queue and adds them to
      * the active linkedlist if the size of the active linkedlist is less than 6.
      */
     public void addItem(){
@@ -91,22 +91,22 @@ public class Game {
             }
         }
     }
-    
+
     /**
      * Initialize Item objects to be added to the dormant Queue.
      * Using the Random class, the method will create gifts and bombs
      * in a 1:1 ratio.
      */
     public void prepareItem() {
-        Item toAdd; 
+        Item toAdd;
         Random rand = new Random();
-        int n = rand.nextInt(2); 
+        int n = rand.nextInt(2);
         // Random class to generate the x-location of the object
         // y-location: same as the height of the screen
         int x = rand.nextInt(450) - 5; //0~screenwidth
-        // int x = 50; 
+        // int x = 50;
         int y = -60;
-        //int y = screenHeight; 
+        //int y = screenHeight;
         if (n == 0){ // when 3, add a present to the dormant queue
             toAdd = new Item(x,y,true); // is a gift
         } else { // so if n=1 or 2
@@ -114,10 +114,14 @@ public class Game {
         }
         dormant.enqueue(toAdd); // adds to the dormant queue
     }
-    
+
 
     public int getScore(){
         return score;
+    }
+
+    public void setScore(int sc){
+        score = sc;
     }
 
     public LinkedList<Item> getActive() {
@@ -164,5 +168,5 @@ public class Game {
     public boolean didEnd() {
         return !isStart;
     }
-    
+
 }
