@@ -17,7 +17,6 @@ public class Game {
     private int score;
     private boolean isStart; // indicates whether the game has started or not
     private Boolean win;
-    // change later *******
     /**
      * Constructor for objects of class Game
      */
@@ -78,7 +77,6 @@ public class Game {
     }
 
     /**
-     * Retrieve Item objects from the dormant queue and adds them to
      * the active linkedlist if the size of the active linkedlist is less than 6.
      */
     public void addItem(){
@@ -168,5 +166,4 @@ public class Game {
     public boolean didEnd() {
         return !isStart;
     }
-
 }
