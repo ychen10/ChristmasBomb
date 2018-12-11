@@ -11,9 +11,10 @@ public class Item
 {
     // instance variables
     boolean typeGift; // true: gift, false: bomb
-    Pair<Integer, Integer> location;
+    int x;
+    int y;
     // change later
-    final int width=10 ; final int height=10;
+    final int width = 10 ; final int height = 10;
     boolean itemCollided; 
 
 
@@ -24,17 +25,26 @@ public class Item
     {
         // initialise instance variables
         typeGift = isGift; 
-        location = new Pair<Integer, Integer>(x,y);
+        this.x = x;
+        this.y = y;
         itemCollided = false; 
     }
 
-    public Pair<Integer, Integer> getLocation(){
-        return location;
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
     
     
-    public void setLocation(int x, int y){
-        this.location = new Pair<Integer, Integer>(x,y);
+    public void setX(int x){
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
     
     public void setItemCollided(){
