@@ -57,7 +57,6 @@ public class Game {
                     // update the game-wide indicator
                     score = score + 50; // update score
                     active.remove(drop);
-                    //System.out.println("COLLIDED WITH A GIFT");
                 } else { // if it's a bomb
                     // change the itemCollided status of the item to true
                     //active.get(active.indexOf(drop)).setItemCollided();
@@ -118,6 +117,10 @@ public class Game {
 
     public int getScore(){
         return score;
+    }
+    
+    public void setScore(int sc){
+        score = sc;
     }
 
     public LinkedList<Item> getActive() {

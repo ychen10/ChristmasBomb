@@ -1,20 +1,20 @@
 #BlueJ package file
-dependency1.from=Game
-dependency1.to=ChristmasTree
+dependency1.from=GamePanel
+dependency1.to=Game
 dependency1.type=UsesDependency
 dependency10.from=GameGUI
 dependency10.to=StartPanel
 dependency10.type=UsesDependency
-dependency2.from=Game
-dependency2.to=Item
+dependency2.from=GamePanel
+dependency2.to=ChristmasTree
 dependency2.type=UsesDependency
 dependency3.from=GamePanel
-dependency3.to=Game
+dependency3.to=Item
 dependency3.type=UsesDependency
-dependency4.from=GamePanel
+dependency4.from=Game
 dependency4.to=ChristmasTree
 dependency4.type=UsesDependency
-dependency5.from=GamePanel
+dependency5.from=Game
 dependency5.to=Item
 dependency5.type=UsesDependency
 dependency6.from=StartPanel
