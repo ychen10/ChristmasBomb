@@ -57,11 +57,6 @@ public class Game {
                     // update the game-wide indicator
                     score = score + 50; // update score
                     active.remove(drop);
-<<<<<<< HEAD
-=======
-                    //System.out.println("collided with a gift, score: "+score);
->>>>>>> chloeymoon
-                    //System.out.println("COLLIDED WITH A GIFT");
                 } else { // if it's a bomb
                     // change the itemCollided status of the item to true
                     //active.get(active.indexOf(drop)).setItemCollided();
