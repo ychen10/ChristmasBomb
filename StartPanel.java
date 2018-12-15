@@ -85,11 +85,11 @@ public class StartPanel extends JPanel {
         //System.out.println("SCORE: "+game.getScore());
         timeLeft--;
 
-        if (timeLeft <= 15) {
-          time.setText("<html><center><font color='red'><h1>Time Left:<br>" + timeLeft + "s</h1></font></center></html>");
-        } else {
-          time.setText("<html><center><h1>Time Left:<br>" + timeLeft + "s</h1></center></html>");
-        }
+        // if (timeLeft <= 15) {
+        //   time.setText("<html><center><font color='red'><h1>Time Left:<br>" + timeLeft + "s</h1></font></center></html>");
+        // } else {
+        //   time.setText("<html><center><h1>Time Left:<br>" + timeLeft + "s</h1></center></html>");
+        // }
       }
     });
     timer.start();
