@@ -51,14 +51,14 @@ public class StartPanel extends JPanel {
     background.setPreferredSize(new Dimension(150, 400));
     //background.setOpaque(true);
 
-    score = new JLabel("<html><h1>Score:</h1>" + game.getScore() + " / 1000</html>", SwingConstants.CENTER);
+    score = new JLabel("<html><center><h1>Score:<br>" + game.getScore() + "/ 1000</h1></center></html>");
     score.setBorder(new EmptyBorder(5,15,5,15));
     score.setOpaque(true);
     background.add(score);
 
     background.add(Box.createRigidArea (new Dimension(0, 100)));
 
-    time = new JLabel("<html><center><h1>  Time Left:<br>" + timeLeft + "s</h1></center></html>");
+    time = new JLabel("<html><center><h1>Time Left:<br>" + timeLeft + "s</h1></center></html>", SwingConstants.CENTER);
     time.setBorder(new EmptyBorder(5,15,5,15));
     time.setBackground(Color.WHITE);
     time.setOpaque(true);
@@ -80,7 +80,7 @@ public class StartPanel extends JPanel {
           timer.stop();
           return;
         }
-        
+
         timeLeft--;
 
         if (timeLeft <= 15) {
@@ -94,7 +94,7 @@ public class StartPanel extends JPanel {
 
     scoreLabel = new Timer(20, new ActionListener() { // timer with 150 millisecond delay
       public void actionPerformed(ActionEvent e) {
-        score.setText("<html><h1>Score:</h1><h3>" + game.getScore() + " / 1000</h3></html>");
+        score.setText("<html><center><h1>Score:<br>" + game.getScore() + "/ 1000</h1></center></html>");
       }
     });
 
