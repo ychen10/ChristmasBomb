@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=GameGUI
-comment0.text=\n\ Write\ a\ description\ of\ class\ GameGUI\ here.\n\n\ @author\ (your\ name)\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\n\ Main\ GUI\ class\ of\ the\ game,\ which\ contains\ the\ JFrame,\ game\ and\ tree.\n\ In\ charge\ of\ putting\ together\ all\ the\ components\ of\ the\ GUI\ and\n\ connecting\ it\ with\ the\ game\ object.\n\n\ @author\ Yiran\ Chen\n\ @version\ 12/08/2018\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 numComments=2

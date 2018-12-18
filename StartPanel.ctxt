@@ -1,15 +1,20 @@
 #BlueJ class context
 comment0.target=StartPanel
+comment0.text=\n\ Start\ Panel\ is\ displayed\ when\ the\ user\ starts\ the\ game\ and\n\ plays\ the\ audio\ file.\ Displays\ the\ game\ panel\ as\ the\ user\n\ presses\ the\ start\ button\n\n\ @author\ Yiran\ Chen\n\ @version\ 12/08/2018\n
 comment1.params=game
 comment1.target=StartPanel(Game)
+comment1.text=\n\ Constructor\ of\ the\ StartPanel\ Class\n\n\ @param\ a\ Game\ object\n
 comment2.params=
 comment2.target=void\ addScoreTime()
+comment2.text=\n\ Adds\ score\ and\ time\ to\ the\ panel\n
 comment3.params=
 comment3.target=void\ startCountdown()
+comment3.text=\n\ Uses\ the\ timer\ to\ start\ counting\ down\ the\ time\ (1000\ sec)\n\ and\ changes\ the\ score\ and\ time\ accordingly\n
 comment4.params=e
 comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
 comment5.params=e
 comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
 comment6.params=
 comment6.target=void\ music()
+comment6.text=\n\ Plays\ music\ using\ AudioPlayer\ and\ the\ designated\ music\ file\n
 numComments=7
