@@ -23,7 +23,7 @@ public class StartPanel extends JPanel {
     setLayout(new FlowLayout(FlowLayout.CENTER));
     try {
       label = new JLabel(); // background of the label
-      label.setLayout(new FlowLayout(FlowLayout.CENTER));
+      //label.setLayout(new FlowLayout(FlowLayout.CENTER));
       BufferedImage background = ImageIO.read(new File("background.png"));
       label.setIcon(new ImageIcon(background));
 
@@ -37,12 +37,15 @@ public class StartPanel extends JPanel {
     }
 
       // JButton
-      start = new JButton("START");
-      StartListener listener = new StartListener();
-      start.addActionListener(listener);
-      label.add(start);
+    start = new JButton("START");
+    StartListener listener = new StartListener();
+    start.addActionListener(listener);
+    start.setSize(80, 50);
+    start.setLocation(350, 400);
 
-      add(label);
+    label.add(start);
+
+    add(label);
     
   }
 
