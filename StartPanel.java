@@ -8,6 +8,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.border.*;
 import javax.swing.Timer;
+import sun.audio.*;
 
 public class StartPanel extends JPanel {
   private JButton start;
@@ -102,8 +103,6 @@ public class StartPanel extends JPanel {
     scoreLabel.start();
     timer.start();
   }
-
-
   private class StartListener implements ActionListener {
     public void actionPerformed(ActionEvent event) {
       start.setEnabled(false);
@@ -113,6 +112,23 @@ public class StartPanel extends JPanel {
       addScoreTime();
       startCountdown();
       game.start();
+      music();
     }
+  }
+
+  public static void music() {
+    AudioPlayer MGP = AudioPlayer.player;
+    AudioStream BGM;
+    AudioData MD;
+    ContinuousAudioDataStream loop = null;
+    try {
+      BGM = new AudioStream(new FileInputStream("westernBeat.wav"));
+      // System.out.println("playing music rn");
+      MD = BGM.getData();
+      loop = new ContinuousAudioDataStream(MD);
+    } catch (IOException error) {
+      System.out.print("file not found");
+    }
+    MGP.start(loop);
   }
 }
