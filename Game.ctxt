@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #BlueJ class context
 comment0.target=Game
 comment0.text=\n\ Implements\ the\ details\ for\ playing\ the\ game,\ using\ ChristmasTree\n\ and\ Item\ class\n\n\ @author\ Chloe\ Moon\n\ @version\ 12/08/2018\n
@@ -35,3 +36,5 @@ comment8.target=void\ drop()
 comment9.params=
 comment9.target=void\ start()
 numComments=15
+=======
+>>>>>>> ychen10
