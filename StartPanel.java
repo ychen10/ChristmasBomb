@@ -14,7 +14,7 @@ public class StartPanel extends JPanel {
   private JPanel gamePanel;
   private Game game;
   private JLabel label, time, score;
-  private Timer timer;
+  private Timer timer, scoreLabel;
   private int timeLeft = 120;
 
   public StartPanel(Game game) {
@@ -51,14 +51,14 @@ public class StartPanel extends JPanel {
     background.setPreferredSize(new Dimension(150, 400));
     //background.setOpaque(true);
 
-    score = new JLabel("<html><center><h1>  Score:<br>" + game.getScore() + " / 1000  </h1></center></html>");
+    score = new JLabel("<html><center><h1>Score:<br>" + game.getScore() + "/ 1000</h1></center></html>");
     score.setBorder(new EmptyBorder(5,15,5,15));
     score.setOpaque(true);
     background.add(score);
 
-    background.add(Box.createRigidArea (new Dimension (0, 100)));
+    background.add(Box.createRigidArea (new Dimension(0, 100)));
 
-    time = new JLabel("<html><center><h1>  Time Left:<br>" + timeLeft + "s</h1></center></html>");
+    time = new JLabel("<html><center><h1>Time Left:<br>" + timeLeft + "s</h1></center></html>", SwingConstants.CENTER);
     time.setBorder(new EmptyBorder(5,15,5,15));
     time.setBackground(Color.WHITE);
     time.setOpaque(true);
@@ -85,12 +85,21 @@ public class StartPanel extends JPanel {
         timeLeft--;
 
         if (timeLeft <= 15) {
-          time.setText("<html><center><font color='red'><h1>Time Left:<br>" + timeLeft + "s</h1></font></center></html>");
+          time.setForeground(Color.red);
+          time.setText("<html><center><h1>Time Left:<br>" + timeLeft + "s</h1></center></html>");
         } else {
           time.setText("<html><center><h1>Time Left:<br>" + timeLeft + "s</h1></center></html>");
         }
       }
     });
+
+    scoreLabel = new Timer(20, new ActionListener() { // timer with 150 millisecond delay
+      public void actionPerformed(ActionEvent e) {
+        score.setText("<html><center><h1>Score:<br>" + game.getScore() + "/ 1000</h1></center></html>");
+      }
+    });
+
+    scoreLabel.start();
     timer.start();
   }
 
