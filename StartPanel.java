@@ -27,10 +27,10 @@ public class StartPanel extends JPanel {
       label.setIcon(new ImageIcon(background));
 
       gamePanel = new GamePanel(this.game);
-       
+
       label.add(gamePanel);
       gamePanel.setVisible(false);
-      
+
     } catch (IOException e) {
       System.out.println(e);
     }
@@ -42,7 +42,7 @@ public class StartPanel extends JPanel {
       label.add(start);
 
       add(label);
-    
+
   }
 
   public void addScoreTime() {
@@ -80,7 +80,8 @@ public class StartPanel extends JPanel {
           timer.stop();
           return;
         }
-
+        score.setText("<html><center><h1>  Score:<br>" + game.getScore() + " / 1000  </h1></center></html>");
+        //System.out.println("SCORE: "+game.getScore());
         timeLeft--;
 
         if (timeLeft <= 15) {
@@ -101,7 +102,7 @@ public class StartPanel extends JPanel {
     scoreLabel.start();
     timer.start();
   }
-  
+
 
   private class StartListener implements ActionListener {
     public void actionPerformed(ActionEvent event) {
