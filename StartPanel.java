@@ -32,11 +32,11 @@ public class StartPanel extends JPanel {
    */
   public StartPanel(Game game) {
     this.game = game;
-    setLayout(new FlowLayout(FlowLayout.CENTER));
+    // setLayout(new FlowLayout(FlowLayout.CENTER));
     try {
       // dispaly background
       label = new JLabel(); // background of the label
-      label.setLayout(new FlowLayout(FlowLayout.CENTER));
+      // label.setLayout(new FlowLayout(FlowLayout.CENTER));
       BufferedImage background = ImageIO.read(new File("background.png"));
       label.setIcon(new ImageIcon(background));
 
@@ -55,8 +55,10 @@ public class StartPanel extends JPanel {
     // Create a Startlistener and add it to the button just created
     StartListener listener = new StartListener();
     start.addActionListener(listener);
-    label.add(start);
+    start.setSize(80, 50);
+    start.setLocation(350, 400);
 
+    label.add(start);
     // add label
     add(label);
   }
