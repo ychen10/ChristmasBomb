@@ -1,15 +1,20 @@
 #BlueJ package file
-dependency1.from=GamePanel
-dependency1.to=Game
+dependency1.from=GameGUI
+dependency1.to=ChristmasTree
 dependency1.type=UsesDependency
+<<<<<<< HEAD
 dependency10.from=StartPanel
 dependency10.to=GamePanel
+=======
+dependency10.from=GamePanel
+dependency10.to=Item
+>>>>>>> master
 dependency10.type=UsesDependency
-dependency2.from=GamePanel
-dependency2.to=ChristmasTree
+dependency2.from=GameGUI
+dependency2.to=Game
 dependency2.type=UsesDependency
-dependency3.from=GamePanel
-dependency3.to=Item
+dependency3.from=GameGUI
+dependency3.to=StartPanel
 dependency3.type=UsesDependency
 dependency4.from=Game
 dependency4.to=ChristmasTree
@@ -23,6 +28,7 @@ dependency6.type=UsesDependency
 dependency7.from=GameGUI
 dependency7.to=Game
 dependency7.type=UsesDependency
+<<<<<<< HEAD
 dependency8.from=GameGUI
 dependency8.to=StartPanel
 dependency8.type=UsesDependency
@@ -33,14 +39,26 @@ editor.fx.0.height=722
 editor.fx.0.width=800
 editor.fx.0.x=544
 editor.fx.0.y=84
+=======
+dependency8.from=GamePanel
+dependency8.to=Game
+dependency8.type=UsesDependency
+dependency9.from=GamePanel
+dependency9.to=ChristmasTree
+dependency9.type=UsesDependency
+editor.fx.0.height=818
+editor.fx.0.width=1154
+editor.fx.0.x=286
+editor.fx.0.y=23
+>>>>>>> master
 objectbench.height=110
-objectbench.width=776
+objectbench.width=461
 package.divider.horizontal=0.6
 package.divider.vertical=0.7841328413284133
 package.editor.height=418
-package.editor.width=658
-package.editor.x=343
-package.editor.y=146
+package.editor.width=674
+package.editor.x=647
+package.editor.y=36
 package.frame.height=600
 package.frame.width=800
 package.numDependencies=10
@@ -57,7 +75,7 @@ target1.height=50
 target1.name=GamePanel
 target1.showInterface=false
 target1.type=ClassTarget
-target1.width=120
+target1.width=100
 target1.x=40
 target1.y=110
 target2.height=50

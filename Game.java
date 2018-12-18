@@ -1,10 +1,8 @@
 import javafoundations.*;
 import java.util.*;
 
-
 /**
- * Implements the details for playing the game, using ChristmasTree
- * and Item class
+ * Implements the details for playing the game, using ChristmasTree and Item class
  *
  * @author Chloe Moon
  * @version 12/08/2018
@@ -12,12 +10,12 @@ import java.util.*;
 public class Game {
     // instance variables
     private ChristmasTree tree;
-    private ArrayQueue<Item> dormant;  // stores the dorman Item objects
+    private ArrayQueue<Item> dormant; // stores the dorman Item objects
     private LinkedList<Item> active; // add Item objects from "dormant" to this linkedlist
     private int score; 
     private boolean isStart; // indicates whether the game has started or not
     private Boolean win;
-    // change later *******    
+    
     /**
      * Constructor for objects of class Game
      */
@@ -31,12 +29,10 @@ public class Game {
         win = null;
     }
 
-    // if it doesn't work maybe put a tree as a parameter
     /**
      * Checks if tree collides with gift or bomb and sets collision var to
      * the respective value (1 if collides with present, 0 if no collision,
      * -1 if collides with bomb)
-     * 
      * 
      * @param dropped item, christmas tree
      */
@@ -114,19 +110,37 @@ public class Game {
         dormant.enqueue(toAdd); // adds to the dormant queue
     }
     
-
+    /**
+     * Returns the score of the game
+     * 
+     * @return score of the game
+     */
     public int getScore(){
         return score;
     }
     
+    /**
+     * Sets score according to the input parameter
+     * 
+     * @param input score (int)
+     */
     public void setScore(int sc){
         score = sc;
     }
 
+    /**
+     * Returns the "active" linked list which contains the Items
+     * displayed on the screen
+     * 
+     * @return linkedlist (active)
+     */
     public LinkedList<Item> getActive() {
         return this.active;
     }
 
+    /**
+     * Iterates through the active vector and drops the Item objects
+     */
     public void drop() {
         Random rand = new Random();
         if (rand.nextInt(7) == 0) addItem();
@@ -141,29 +155,57 @@ public class Game {
         }
     }
 
+    /**
+     * Checks if the game started, adds Item objects to the dormant
+     * array queue, and drop them
+     */
     public void start() {
         this.isStart = true;
         for (int i = 0; i < 6; i ++) addItem();
         drop();
     }
 
+    /**
+     * Returns the ChristmasTree object
+     * 
+     * @return ChristmasTree
+     */
     public ChristmasTree getTree() {
         return this.tree;
     }
 
+    /**
+     * Returns true iff the user wins (if the score is above 1000)
+     * 
+     * @return true iff the user wins (score above 1000) 
+     *         false otherwise
+     */
     public boolean win() {
         return (score >= 1000);
     }
 
+    /**
+     * Returns true iff the user loses
+     * Checks if the score is below 0 or win is false (for the case
+     * where score is above 0 but the time runs out)
+     */
     public boolean lose() {
         return score < 0 || (win != null && win.equals(false));
     }
 
+    /**
+     * Set win to false and ends the game
+     */
     public void setLose() {
         win = false;
         isStart = false;
     }
 
+    /**
+     * Return whether the game ended or not
+     * 
+     * @return true iff the game ended, false otherwise
+     */
     public boolean didEnd() {
         return !isStart;
     }
