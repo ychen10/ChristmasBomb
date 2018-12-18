@@ -20,19 +20,12 @@ comment2.params=drop
 comment2.target=void\ doCollide(Item)
 <<<<<<< HEAD
 comment2.text=\n\ Checks\ if\ tree\ collides\ with\ gift\ or\ bomb\ and\ sets\ collision\ var\ to\n\ the\ respective\ value\ (1\ if\ collides\ with\ present,\ 0\ if\ no\ collision,\n\ -1\ if\ collides\ with\ bomb)\n\n\n\ @param\ dropped\ item,\ christmas\ tree\n
-=======
-comment2.text=\n\ Checks\ if\ tree\ collides\ with\ gift\ or\ bomb\ and\ sets\ collision\ var\ to\n\ the\ respective\ value\ (1\ if\ collides\ with\ present,\ 0\ if\ no\ collision,\n\ -1\ if\ collides\ with\ bomb)\n\ \n\ \n\ @param\ dropped\ item,\ christmas\ tree\n
->>>>>>> chloeymoon
 comment3.params=
 comment3.target=void\ endGame()
 comment3.text=\n\ Ends\ the\ game\ if\ the\ score\ reches\ 1000\ or\ if\ the\ score\ <0.\n
 comment4.params=
 comment4.target=void\ addItem()
-<<<<<<< HEAD
 comment4.text=\n\ Retrieve\ Item\ objects\ from\ the\ dormant\ queue\ and\ adds\ them\ to\n\ the\ active\ linkedlist\ if\ the\ size\ of\ the\ active\ linkedlist\ is\ less\ than\ 6.\n
-=======
-comment4.text=\n\ Retrieve\ Item\ objects\ from\ the\ dormant\ queue\ and\ adds\ them\ to\ \n\ the\ active\ linkedlist\ if\ the\ size\ of\ the\ active\ linkedlist\ is\ less\ than\ 6.\n
->>>>>>> chloeymoon
 comment5.params=
 comment5.target=void\ prepareItem()
 comment5.text=\n\ Initialize\ Item\ objects\ to\ be\ added\ to\ the\ dormant\ Queue.\n\ Using\ the\ Random\ class,\ the\ method\ will\ create\ gifts\ and\ bombs\n\ in\ a\ 1\:1\ ratio.\n
@@ -45,3 +38,5 @@ comment8.target=java.util.LinkedList\ getActive()
 comment9.params=
 comment9.target=void\ drop()
 numComments=16
+=======
+>>>>>>> 48f434b4872a92064d2fed7d8a57aa08bb45cb94
