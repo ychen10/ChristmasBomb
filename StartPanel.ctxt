@@ -10,4 +10,6 @@ comment4.params=e
 comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
 comment5.params=e
 comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
-numComments=6
+comment6.params=
+comment6.target=void\ music()
+numComments=7
