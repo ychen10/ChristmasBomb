@@ -13,22 +13,22 @@ public class Game {
     // instance variables
     private ChristmasTree tree;
     private ArrayQueue<Item> dormant;  // stores the dorman Item objects
-    private Vector<Item> active; // add Item objects from "dormant" to this vector
+    private LinkedList<Item> active; // add Item objects from "dormant" to this linkedlist
     private int score; 
     private boolean isStart; // indicates whether the game has started or not
-    // change later *******
-    private final int screenWidth = 500; final int screenHeight = 700;
-    
+    private Boolean win;
+    // change later *******    
     /**
      * Constructor for objects of class Game
      */
     public Game(ChristmasTree tree) {
         // tree
         dormant = new ArrayQueue<Item>();
-        active = new Vector<Item>();
+        active = new LinkedList<Item>();
         isStart = false;
         score = 0;
         this.tree = tree;
+        win = null;
     }
 
     // if it doesn't work maybe put a tree as a parameter
@@ -40,79 +40,52 @@ public class Game {
      * 
      * @param dropped item, christmas tree
      */
-    public int doCollide(Item drop){
-        if (active.contains(drop)){
+    public void doCollide(Item drop){
+        if (active.contains(drop)) {
             // get location of the item
-            int itemX = drop.getX();
-            int itemY = drop.getY();
-            // get location of the tree 
+            int itemX = drop.getX() + 36;// actual dropping object
+            int itemY = drop.getY() + 36;
+            // get location of the tree
             int treeX = tree.getX();
-            int treeY = tree.getY();
-            // calculate the distance between the two objects
-            int treeW = tree.getWidth();
-            int treeH = tree.getHeight();
-            int itemW = drop.getWidth();
-            // int itemH = drop.getHeight();
-            // range
-            double xRange = (treeW+itemW)/2.0;
-            double yRange = (treeH+treeW)/2.0;
-            
-            // if within a certain range, they collide
-            if (Math.abs(itemX-treeX)<=xRange && Math.abs(itemY-treeY)<=yRange){
-                if(drop.isGift()){ // if it's a gift
-                    // does setting the drop directly makes sense?
-                    // change the itemCollided status of the item to true
-                    active.get(active.indexOf(drop)).setItemCollided();
+            // int treeY = tree.getY();
+            int starX = treeX + 160; // 25+36
+            int starY = 475;
+            double distance = Math.sqrt(Math.pow(itemX - starX, 2) + Math.pow(itemY - starY, 2));
+            if (distance < 50) { // do collide
+                if (drop.isGift()) {
+                    //active.get(active.indexOf(drop)).setItemCollided();
                     // update the game-wide indicator
-                    score = score+50; // update score
+                    score = score + 50; // update score
                     active.remove(drop);
-                    return 1;
-                } else if(!drop.isGift()){ // if it's a bomb
+                    //System.out.println("COLLIDED WITH A GIFT");
+                } else { // if it's a bomb
                     // change the itemCollided status of the item to true
-                    active.get(active.indexOf(drop)).setItemCollided();
-                    score = score-100; // update score
+                    //active.get(active.indexOf(drop)).setItemCollided();
+                    score = score - 100; // update score
                     active.remove(drop);
-                    return -1;
+                    //System.out.println("COLLIDED WITH A BOMB");
                 }
-            } else {
-                return 0;
             }
-        } else { // if active vector (currently dropping) doesn't have this item
-            System.out.println("Item not being dropped (not in 'Active')");
         }
-        return 0;
     }
     
     
     /**
      * Ends the game if the score reches 1000 or if the score <0.
      */
-    public boolean endGame(){
-        
-        if (this.isWin() || this.isLose()){
-            isStart = false; // endGame
-        }
-        
-        return true;
-    }
-    
-    public boolean isWin(){
-        return this.getScore() >= 1000;
-    }
-    
-    public boolean isLose(){
-        return this.getScore() < 0;
+    public void endGame(){
+        isStart = false;
     }
     
     /**
      * Retrieve Item objects from the dormant queue and adds them to 
-     * the active Vector if the size of the active vector is less than 6.
+     * the active linkedlist if the size of the active linkedlist is less than 6.
      */
     public void addItem(){
         Random rand = new Random();
         if (active.size() < 5){
             if (dormant.isEmpty()) prepareItem();
-            if (rand.nextInt(3) == 0) {
+            if (rand.nextInt(6) == 0) {
                 Item toAdd = dormant.dequeue(); // gets the item from the dormant queue
                 active.add(toAdd);
             }
@@ -147,7 +120,7 @@ public class Game {
         return score;
     }
 
-    public Vector<Item> getActive() {
+    public LinkedList<Item> getActive() {
         return this.active;
     }
 
@@ -160,10 +133,9 @@ public class Game {
                 Item item = active.get(i);
                 item.setY(item.getY() + 5);
                 if (item.getY() > 740) active.remove(item);
+                doCollide(item);
             }
         }
-
-        // do collide
     }
 
     public void start() {
@@ -174,6 +146,23 @@ public class Game {
 
     public ChristmasTree getTree() {
         return this.tree;
+    }
+
+    public boolean win() {
+        return (score >= 1000);
+    }
+
+    public boolean lose() {
+        return score < 0 || (win != null && win.equals(false));
+    }
+
+    public void setLose() {
+        win = false;
+        isStart = false;
+    }
+
+    public boolean didEnd() {
+        return !isStart;
     }
     
 }

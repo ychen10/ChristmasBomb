@@ -8,13 +8,14 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.border.*;
 import javax.swing.Timer;
+import sun.audio.*;
 
 public class StartPanel extends JPanel {
-    private JButton start;
+    private JButton start,music;
     private JPanel gamePanel;
     private Game game;
     private JLabel label, time, score;
-    private Timer timer, check;
+    private Timer timer;
     private int timeLeft = 120;
 
     public StartPanel(Game game) {
@@ -40,6 +41,12 @@ public class StartPanel extends JPanel {
         StartListener listener = new StartListener();
         start.addActionListener(listener);
         label.add(start);
+
+        //music = new JButton("MUSIC");
+
+        
+        //music.addActionListener(new AL());
+        //label.add(music);
 
         add(label);
 
@@ -68,12 +75,20 @@ public class StartPanel extends JPanel {
     }
 
     public void startCountdown() {
-        timer = new Timer(100, new ActionListener() { // timer with 150 millisecond delay
+        timer = new Timer(1000, new ActionListener() { // timer with 150 millisecond delay
                 public void actionPerformed(ActionEvent e) {
-                    timeLeft --;
-                    if (timeLeft < 0){
-                        game.endGame();
+                    if (game.didEnd()) {
+                        timer.stop();
+                        return;
                     }
+                    if (timeLeft <= 0) {
+                        game.setLose();
+                        timer.stop();
+                        return;
+                    }
+
+                    timeLeft--;
+
                     if (timeLeft <= 15) {
                         time.setText("<html><center><font color='red'><h1>Time Left:<br>" + timeLeft + "s</h1></font></center></html>");
                     } else {
@@ -84,17 +99,6 @@ public class StartPanel extends JPanel {
         timer.start();
     }
 
-    public void startCheck(){
-        check = new Timer(5, new ActionListener() { // timer with 150 millisecond delay
-                public void actionPerformed(ActionEvent e) {
-                    GameOverPanel over = new GameOverPanel(game);
-                    //add(over);
-                    //label.add(over);
-                }
-            });
-
-        timer.start();
-    }
     private class StartListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             start.setEnabled(false);
@@ -104,6 +108,25 @@ public class StartPanel extends JPanel {
             addScoreTime();
             startCountdown();
             game.start();
+            music();
         }
     }
+
+    
+    public static void music(){
+        AudioPlayer MGP = AudioPlayer.player;
+        AudioStream BGM;
+        AudioData MD;
+        ContinuousAudioDataStream loop = null;
+        try{
+            BGM = new AudioStream(new FileInputStream("westernBeat.wav"));
+            System.out.println("playing music rn");
+            MD = BGM.getData();
+            loop = new ContinuousAudioDataStream(MD);
+        }catch(IOException error){
+            System.out.print("file not found");
+        }
+        MGP.start(loop);
+    }
+
 }
